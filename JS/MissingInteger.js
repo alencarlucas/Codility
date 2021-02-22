@@ -1,13 +1,16 @@
-function solution(A, N) {
-  // Ordena e filtra registros exclusivos e positivos no array
-  A = A.filter( (value, i, arr) => {
-    return value > 0;
-  }).sort( (a, b) => a - b);
-  let min = 1;
-  for(let n of A)
-    if(n != min) return min
-    if (i + 1 != A[i] && A[i] + 1 != A[i + 1]) return A[i] + 1;
-  return A.length;
+function solution(A) {
+  const sortedA = A
+    .filter(number => number > 0)
+    .sort((a, b) => a - b)
+
+  if (!sortedA.length) return 1
+  const max = sortedA[sortedA.length - 1]
+  const hashMap = {}
+  sortedA.forEach(i => hashMap[i] = true)
+  for(let i = 1; i < max;  ++i) {
+    if (!hashMap[i]) return i
+  }
+  return max + 1
 }
 
 module.exports = solution;
